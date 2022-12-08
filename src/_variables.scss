@@ -1,0 +1,30 @@
+/* Colors */
+
+$purle-400: hsl(257, 67%, 51%);
+$purle-300: hsl(257, 100%, 64%);
+$pink-400: hsl(347, 97%, 70%);
+$yellow-400: hsl(41, 100%, 70%);
+
+/* Fonts */
+
+@font-face {
+  font-family: SpaceGroteskMedium;
+  src: url('../public/fonts/static/SpaceGrotesk-Medium.ttf');
+}
+
+@font-face {
+  font-family: SpaceGroteskBold;
+  src: url('../public/fonts/static/SpaceGrotesk-Bold.ttf');
+}
+
+$heading-500 : 3.5rem;
+$heading-400 : 1.5rem;
+$heading-300 : 1.25rem;
+$heading-200 : 1rem;
+$body-400 : 1rem;
+
+/* Breakpoints */
+
+$desktop: 1440px;
+$tablet: 768px;
+$desktop: 375px;

@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.scss';
+import Ingame from './Ingame';
+import Rules from './Rules';
+import { Route, Routes } from 'react-router-dom';
+import Menu from './Menu';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <main className='main-container'>
+        <Routes>
+          <Route path="/" element={<Menu />} />
+          <Route path="ingame" element={<Ingame />} />
+          <Route path="rules" element={<Rules />} />
+        </Routes>
+      </main>
+      {/* <footer className='ingame-footer'></footer> */}
+
+    </>
   );
 }
 
