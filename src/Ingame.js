@@ -13,8 +13,8 @@ import useData from './Hooks/useData';
 const Ingame = () => {
 
 
-    const [timer, setTimer] = useState(30);
-    var [playerTurn, setPlayerTurn] = useState("Player 1");
+    const { timer, setTimer } = useData();
+    const { playerTurn, setPlayerTurn } = useData();
     const { board, setBoard } = useData();
     const [scorePlayerOne, setScorePlayerOne] = useState(0);
     const [scorePlayerTwo, setScorePlayerTwo] = useState(0);
@@ -25,16 +25,19 @@ const Ingame = () => {
         if (timer === null) return;
         const timerEdited = timer - 1;
         const ended = timer <= 0;
+
         if (!ended) {
             setTimeout(
                 () => setTimer(timerEdited)
                 , 1000);
+
         }
 
         if (ended) {
+
             setTimer(null);
-            launchTimer();
             onTimerResolve();
+            launchTimer();
         }
 
     }, [timer]);
@@ -48,26 +51,6 @@ const Ingame = () => {
         setTimer(30);
     }
 
-    const playDisc = (e) => {
-
-        // e.target.style.zIndex = '2';
-        // let isFull = true;
-        // for (let i = columnPlayed; i <= columnPlayed; i++) {
-        //     for (let j = 0; j < board.length; j++) {
-        //         if (board[j][i] == null) {
-        //             //Pose jeton ici
-        //             board[j][i] = 1;
-        //             isFull = false;
-
-        //         }
-        //         //console.log(board[j][i]);
-        //     }
-        // }
-        // if (isFull) {
-        //     //alert("You can't play here");
-        //     console.log("You can't play here");
-        // }
-    }
 
 
     const checkVictory = () => {
@@ -145,21 +128,12 @@ const Ingame = () => {
 
                     <img src={whiteBoard} className='board-img white-board' alt='' />
                     <div className='board'>
-                        {/* <RowBoard />
-                        <RowBoard />
-                        <RowBoard />
-                        <RowBoard />
-                        <RowBoard />
-                        <RowBoard /> */}
-                        <div className='row-board'>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                            <div className='column-board' onClick={playDisc}></div>
-                        </div>
+                        <RowBoard idRow="5" />
+                        <RowBoard idRow="4" />
+                        <RowBoard idRow="3" />
+                        <RowBoard idRow="2" />
+                        <RowBoard idRow="1" />
+                        <RowBoard idRow="0" />
                     </div>
                 </div>
                 <div className="game-messages-container">
@@ -171,7 +145,6 @@ const Ingame = () => {
                 </div>
                 <footer className='ingame-footer'></footer>
             </div>
-
         </>
     );
 };

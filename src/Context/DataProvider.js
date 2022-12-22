@@ -2,7 +2,8 @@ import { createContext, useState } from 'react';
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-
+    const [playerTurn, setPlayerTurn] = useState("Player 1");
+    const [timer, setTimer] = useState(30);
     const [board, setBoard] = useState([
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
@@ -15,7 +16,9 @@ export const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={{
-            board, setBoard
+            board, setBoard,
+            playerTurn, setPlayerTurn,
+            timer, setTimer
         }}>
             {children}
         </DataContext.Provider>
