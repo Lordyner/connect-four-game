@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from './images/logo.svg'
 import avatarPlayerOne from './images/player-one.svg'
 import avatarPlayerTwo from './images/player-two.svg'
@@ -13,11 +13,61 @@ import useData from './Hooks/useData';
 const Ingame = () => {
 
 
-    const [chrono, setChrono] = useState(30);
-    const [columnPlayed, setColumnPlayed] = useState();
-
+    const [timer, setTimer] = useState(30);
+    var [playerTurn, setPlayerTurn] = useState("Player 1");
     const { board, setBoard } = useData();
+    const [scorePlayerOne, setScorePlayerOne] = useState(0);
+    const [scorePlayerTwo, setScorePlayerTwo] = useState(0);
 
+    let timerInterval = null;
+    useEffect(() => {
+
+        if (timer === null) return;
+        const timerEdited = timer - 1;
+        const ended = timer <= 0;
+        if (!ended) {
+            setTimeout(
+                () => setTimer(timerEdited)
+                , 1000);
+        }
+
+        if (ended) {
+            setTimer(null);
+            launchTimer();
+            onTimerResolve();
+        }
+
+    }, [timer]);
+
+    const onTimerResolve = () => {
+        playerTurn === "Player 1" ? setPlayerTurn("Player 2") : setPlayerTurn("Player 1");
+    }
+
+
+    function launchTimer() {
+        setTimer(30);
+    }
+
+    const playDisc = (e) => {
+
+        // e.target.style.zIndex = '2';
+        // let isFull = true;
+        // for (let i = columnPlayed; i <= columnPlayed; i++) {
+        //     for (let j = 0; j < board.length; j++) {
+        //         if (board[j][i] == null) {
+        //             //Pose jeton ici
+        //             board[j][i] = 1;
+        //             isFull = false;
+
+        //         }
+        //         //console.log(board[j][i]);
+        //     }
+        // }
+        // if (isFull) {
+        //     //alert("You can't play here");
+        //     console.log("You can't play here");
+        // }
+    }
 
 
     const checkVictory = () => {
@@ -78,14 +128,14 @@ const Ingame = () => {
                     <div className="d-flex flex-column">
                         <div className="interactive-button player-panel secondary">
                             <span className="player-name heading-xs">PLAYER 1</span>
-                            <span className="score">12</span>
+                            <span className="score">{scorePlayerOne}</span>
                         </div>
                         <img src={avatarPlayerOne} className='avatar-player-one' alt='' />
                     </div>
                     <div className="d-flex flex-column">
                         <div className="interactive-button player-panel secondary">
                             <span className="player-name heading-xs">PLAYER 2</span>
-                            <span className="score">23</span>
+                            <span className="score">{scorePlayerTwo}</span>
                         </div>
                         <img src={avatarPlayerTwo} className='avatar-player-two' alt='' />
                     </div>
@@ -95,23 +145,33 @@ const Ingame = () => {
 
                     <img src={whiteBoard} className='board-img white-board' alt='' />
                     <div className='board'>
+                        {/* <RowBoard />
                         <RowBoard />
                         <RowBoard />
                         <RowBoard />
                         <RowBoard />
-                        <RowBoard />
-                        <RowBoard />
+                        <RowBoard /> */}
+                        <div className='row-board'>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                            <div className='column-board' onClick={playDisc}></div>
+                        </div>
                     </div>
                 </div>
                 <div className="game-messages-container">
-                    <img src={playerOneTurn} alt='' />
+                    <img src={playerTurn === "Player 1" ? playerOneTurn : playerTwoTurn} alt='' />
                     <div className="turn-infos">
-                        <span className='turn-text heading-xs'>PLAYER 1'S TURN</span>
-                        <span className='turn-chrono heading-l'>{chrono}s</span>
+                        <span className='turn-text heading-xs'>{playerTurn} TURN</span>
+                        <span className='turn-chrono heading-l'>{timer}s</span>
                     </div>
                 </div>
+                <footer className='ingame-footer'></footer>
             </div>
-            <footer className='ingame-footer'></footer>
+
         </>
     );
 };

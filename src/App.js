@@ -15,8 +15,6 @@ function App() {
           <Route path="rules" element={<Rules />} />
         </Routes>
       </main>
-      {/* <footer className='ingame-footer'></footer> */}
-
     </>
   );
 }

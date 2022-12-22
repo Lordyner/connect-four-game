@@ -6,6 +6,12 @@ const DiscSlot = () => {
     const [columnPlayed, setColumnPlayed] = useState();
 
     const { board, setBoard } = useData();
+    var [inGame, setInGame] = useState(false);
+
+
+    const startGame = () => {
+        setInGame(true);
+    }
 
     const playDisc = (e) => {
         console.log("Disc played");
