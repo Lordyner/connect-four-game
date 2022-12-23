@@ -43,6 +43,7 @@ const DiscSlot = ({ idRow, idColumn }) => {
     }
     return (
         <div className='disc-slot' id={`${idColumn},${idRow}`} onClick={playDisc} ></div>
+
     );
 };
 

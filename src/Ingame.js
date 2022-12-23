@@ -19,7 +19,7 @@ const Ingame = () => {
     const [scorePlayerOne, setScorePlayerOne] = useState(0);
     const [scorePlayerTwo, setScorePlayerTwo] = useState(0);
 
-    let timerInterval = null;
+
     useEffect(() => {
 
         if (timer === null) return;
