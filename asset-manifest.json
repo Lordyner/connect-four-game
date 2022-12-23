@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/connect-four-game/static/css/main.95b2175e.css",
-    "main.js": "/connect-four-game/static/js/main.dd14b52e.js",
+    "main.js": "/connect-four-game/static/js/main.57ef0476.js",
     "static/media/SpaceGrotesk-Medium.ttf": "/connect-four-game/static/media/SpaceGrotesk-Medium.dff8d806ce24db6ac483.ttf",
     "static/media/SpaceGrotesk-Bold.ttf": "/connect-four-game/static/media/SpaceGrotesk-Bold.96e001703fcc4898de0e.ttf",
     "static/media/board-layer-black-small.svg": "/connect-four-game/static/media/board-layer-black-small.42afffd73e45d00ba497d42094c95366.svg",
@@ -17,10 +17,10 @@
     "static/media/icon-check.svg": "/connect-four-game/static/media/icon-check.09edb9dc6d34aac5a1b039e28520070b.svg",
     "index.html": "/connect-four-game/index.html",
     "main.95b2175e.css.map": "/connect-four-game/static/css/main.95b2175e.css.map",
-    "main.dd14b52e.js.map": "/connect-four-game/static/js/main.dd14b52e.js.map"
+    "main.57ef0476.js.map": "/connect-four-game/static/js/main.57ef0476.js.map"
   },
   "entrypoints": [
     "static/css/main.95b2175e.css",
-    "static/js/main.dd14b52e.js"
+    "static/js/main.57ef0476.js"
   ]
 }
