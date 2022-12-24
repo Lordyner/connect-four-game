@@ -37,9 +37,17 @@
   flex-direction: column;
 }
 
+.text-transform-up {
+  text-transform: uppercase;
+}
+
+.jusitify-center {
+  justify-content: center !important;
+}
+
 #root {
   height: 100vh;
-  //overflow: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -102,6 +110,7 @@ body {
       display: flex;
       flex-direction: row;
       gap: 1rem;
+      margin-bottom: 1.5rem;
 
       .avatar-player-one,
       .avatar-player-two {
@@ -212,11 +221,26 @@ body {
       position: relative;
       color: white;
       max-height: 12rem;
-      bottom: 4rem;
+      bottom: 6rem;
       z-index: 20;
 
       &:after {
         background-color: red;
+      }
+
+      .win-message-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 17.813rem;
+        background-color: white;
+        border: 3px solid black;
+        color: black;
+        align-items: center;
+        padding: .5rem;
+        gap: .5rem;
+        min-height: 10rem;
+        border-radius: 2.5rem;
+        box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, black 0px 13px 0px 0px;
       }
     }
 
@@ -226,7 +250,52 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      &.playerOne {
+        color: white;
+      }
+
+      &.playerTwo {
+        color: black;
+      }
     }
+  }
+
+  .popup-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: variables.$purle-300;
+    align-items: center;
+    color: white;
+    border-radius: 2rem;
+    padding: 1rem;
+    border: 2px solid black;
+    position: fixed;
+    width: 90%;
+    height: 50%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .filter {
+    position: relative;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  #filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    height: initial;
   }
 
   .ingame-footer {
@@ -239,6 +308,14 @@ body {
     min-width: 30rem;
     height: 10rem;
     z-index: 0;
+
+    &.playerOneWin {
+      background-color: variables.$pink-400;
+    }
+
+    &.playerTwoWin {
+      background-color: variables.$yellow-400;
+    }
   }
 
   /* Rules style*/
