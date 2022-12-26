@@ -20,7 +20,7 @@ const PopupMenu = ({ showPopup, setShowPopup, restartGame, resumeTimer }) => {
                 <Link to='/' onClick={() => {
                     setShowPopup(!showPopup);
                     restartGame();
-                }} className='interactive-button primary heading-m jusitify-center'>QUIT GAME</Link>
+                }} className='interactive-button tertiary heading-m jusitify-center'>QUIT GAME</Link>
             </div >
         </>
     );
