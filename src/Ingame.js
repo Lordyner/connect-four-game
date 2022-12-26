@@ -134,7 +134,7 @@ const Ingame = () => {
                 <div className="game-messages-container">
                     {!isGameFinished && <><img src={playerTurn === "Player 1" ? playerOneTurn : playerTwoTurn} alt='' />
                         <div className={playerTurn === "Player 1" ? "turn-infos playerOne" : "turn-infos playerTwo"}>
-                            <span className='turn-text heading-xs'>{playerTurn} TURN</span>
+                            <span className='turn-text heading-xs'>{playerTurn}'S TURN</span>
                             <span className='turn-chrono heading-l'>{timer}s</span>
                         </div> </>}
                     {isGameFinished && <>
