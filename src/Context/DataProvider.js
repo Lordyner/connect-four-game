@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
     const [winner, setWinner] = useState(null);
     const [scorePlayerOne, setScorePlayerOne] = useState(0);
     const [scorePlayerTwo, setScorePlayerTwo] = useState(0);
+    const [showPopup, setShowPopup] = useState();
     const [board, setBoard] = useState([
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
@@ -17,7 +18,6 @@ export const DataProvider = ({ children }) => {
         [null, null, null, null, null, null, null]
     ]);
 
-
     return (
         <DataContext.Provider value={{
             board, setBoard,
@@ -26,7 +26,8 @@ export const DataProvider = ({ children }) => {
             isGameFinished, setIsGameFinished,
             winner, setWinner,
             scorePlayerOne, setScorePlayerOne,
-            scorePlayerTwo, setScorePlayerTwo
+            scorePlayerTwo, setScorePlayerTwo,
+            showPopup, setShowPopup
         }}>
             {children}
         </DataContext.Provider>

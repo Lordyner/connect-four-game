@@ -22,9 +22,6 @@ const DiscSlot = ({ idRow, idColumn }) => {
         for (let i = columnPlayed; i <= columnPlayed; i++) {
             for (let j = 0; j < board.length; j++) {
 
-                console.log("x : " + i);
-                console.log("y : " + j)
-                console.log("Board : " + board[j][i])
                 if (board[j][i] == null) {
                     // Pose jeton côté IHM
                     playerTurn === "Player 1" ?
@@ -44,9 +41,7 @@ const DiscSlot = ({ idRow, idColumn }) => {
     const checkVictory = () => {
         let playerPlaying = playerTurn === "Player 1" ? 1 : 2;
         // Algo de victoire en row
-        // Si le joueur 1 à jouer vérifier les 1, si c'est le joueur 2, vérifier les 2 (variabiliser)
         for (let i = 0; i < board.length; i++) {
-            console.log("Row numéro : " + i);
             let inRowPoint = 0;
             for (let j = 0; j < board[i].length; j++) {
                 if (board[i][j] === playerPlaying) {
@@ -68,7 +63,6 @@ const DiscSlot = ({ idRow, idColumn }) => {
 
         // Algo de victoire en column
         for (let i = 0; i <= board[0].length; i++) {
-            console.log("Colonne numéro : " + i);
             let inColumnPoint = 0;
             for (let j = 0; j < board.length; j++) {
                 if (board[j][i] === playerPlaying) {
@@ -85,12 +79,79 @@ const DiscSlot = ({ idRow, idColumn }) => {
                     playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
                     return;
                 }
-                //console.log(board[j][i]);
-
             }
         }
 
-        //TODO algo de vérif pas de puissance 4 en diag 
+        // algo de vérif pas de puissance 4 en diag partant du bas
+        let scoreDiag = 0;
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                //Slot où l'on se trouve contient un jeton du joueur
+                if (board[i][j] === playerPlaying) {
+                    // On incrémente le score
+                    scoreDiag++;
+                    let nextRow = i + 1;
+                    let nextColumn = j + 1;
+
+                    for (nextColumn; nextColumn < board[0].length; nextColumn++) {
+                        if (nextRow < 6 && board[nextRow][nextColumn] === playerPlaying) {
+                            scoreDiag++;
+                            nextRow++;
+                            if (scoreDiag >= 4) {
+                                setIsGameFinished(true);
+                                setTimer(0);
+                                setWinner(playerTurn);
+                                playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+                                return;
+                            }
+                        } else {
+                            scoreDiag = 0;
+
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // algo de vérif pas de puissance 4 en diag partant du haut
+        for (let i = board.length - 1; i > 0; i--) {
+            for (let j = 0; j < board[i].length; j++) {
+                //Slot où l'on se trouve contient un jeton du joueur
+                if (board[i][j] === playerPlaying) {
+                    // On incrémente le score
+                    scoreDiag++;
+                    let nextRow = i - 1;
+                    let nextColumn = j + 1;
+
+                    for (nextColumn; nextColumn < board[0].length; nextColumn++) {
+                        if (board[nextRow][nextColumn] === playerPlaying) {
+                            scoreDiag++;
+                            nextRow--;
+                            if (scoreDiag >= 4) {
+                                setIsGameFinished(true);
+                                setTimer(0);
+                                setWinner(playerTurn);
+                                playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+                                return;
+                            }
+                            if (nextRow < 0) {
+                                scoreDiag = 0;
+                                break;
+                            }
+                        } else {
+                            scoreDiag = 0;
+                            break;
+                        }
+                    }
+
+                } else {
+                    scoreDiag = 0;
+                }
+
+            }
+        }
     }
 
     return (
