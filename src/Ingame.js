@@ -86,6 +86,7 @@ const Ingame = () => {
             if (discSlot.classList.contains('player-one-active') || discSlot.classList.contains('player-two-active')) {
                 discSlot.classList.remove('player-one-active');
                 discSlot.classList.remove('player-two-active');
+                discSlot.style.zIndex = '100'
             }
         })
     }
@@ -145,7 +146,7 @@ const Ingame = () => {
                         </div>
                     </>}
                 </div>
-                <footer className={winner !== null ? winner === "Player 1" ? "ingame-footer playerOneWin" : "ingame-footer playerTwoWin" : "ingame-footer"}></footer>
+                <footer className={winner !== null ? winner === "Player 1" ? "ingame-footer winner playerOneWin" : "ingame-footer winner playerTwoWin" : "ingame-footer"}></footer>
             </div>
 
             {showPopup ? <PopupMenu showPopup={showPopup} setShowPopup={setShowPopup} restartGame={restartGame} resumeTimer={resumeTimer} /> : null}

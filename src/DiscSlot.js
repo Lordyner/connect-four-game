@@ -12,17 +12,17 @@ const DiscSlot = ({ idRow, idColumn }) => {
     const { scorePlayerOne, setScorePlayerOne } = useData();
     const { scorePlayerTwo, setScorePlayerTwo } = useData();
 
-
     const playDisc = (e) => {
         if (isGameFinished) {
             return;
         }
         let columnPlayed = e.target.id.split(",")[0];
-        //e.target.style.zIndex = '2';
+
         for (let i = columnPlayed; i <= columnPlayed; i++) {
             for (let j = 0; j < board.length; j++) {
 
                 if (board[j][i] == null) {
+                    document.getElementById(i + "," + j).style.zIndex = '2';
                     // Pose jeton côté IHM
                     playerTurn === "Player 1" ?
                         document.getElementById(i + "," + j).classList.add('player-one-active')
@@ -47,9 +47,11 @@ const DiscSlot = ({ idRow, idColumn }) => {
                 if (board[i][j] === playerPlaying) {
                     //Si l'élément suivant de la row vaut quelque chose, on incrémente le compteur
                     inRowPoint++;
+
                 } else {
                     //Sinon on le reset
                     inRowPoint = 0;
+
                 }
                 if (inRowPoint >= 4) {
                     setIsGameFinished(true);
@@ -111,6 +113,8 @@ const DiscSlot = ({ idRow, idColumn }) => {
                         }
                     }
 
+                } else {
+                    scoreDiag = 0;
                 }
             }
         }
