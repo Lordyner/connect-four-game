@@ -2,13 +2,18 @@ import { createContext, useState } from 'react';
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-    const [playerTurn, setPlayerTurn] = useState("Player 1");
+    const [currentPlayer, setCurrentPlayer] = useState(1);
     const [timer, setTimer] = useState(30);
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [winner, setWinner] = useState(null);
     const [scorePlayerOne, setScorePlayerOne] = useState(0);
     const [scorePlayerTwo, setScorePlayerTwo] = useState(0);
     const [showPopup, setShowPopup] = useState();
+    let [nbTokenPlayerOne, setNbTokenPlayerOne] = useState();
+    let [nbTokenPlayerTwo, setNbTokenPlayerTwo] = useState();
+
+    // Can't use fill method because it creates one row that's internally referenced many times
+    // So when we try to update a value, it updates the whole column.
     const [board, setBoard] = useState([
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
@@ -21,13 +26,15 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             board, setBoard,
-            playerTurn, setPlayerTurn,
+            currentPlayer, setCurrentPlayer,
             timer, setTimer,
             isGameFinished, setIsGameFinished,
             winner, setWinner,
             scorePlayerOne, setScorePlayerOne,
             scorePlayerTwo, setScorePlayerTwo,
-            showPopup, setShowPopup
+            showPopup, setShowPopup,
+            nbTokenPlayerOne, setNbTokenPlayerOne,
+            nbTokenPlayerTwo, setNbTokenPlayerTwo
         }}>
             {children}
         </DataContext.Provider>

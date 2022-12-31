@@ -1,114 +1,87 @@
 import { useState } from 'react';
 import useData from './Hooks/useData';
 
-const DiscSlot = ({ idRow, idColumn }) => {
+const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPlayerTwo, nbTokenPlayerOne, setNbTokenPlayerOne }) => {
 
 
-    const { board, setBoard } = useData();
-    const { timer, setTimer } = useData();
-    const { isGameFinished, setIsGameFinished } = useData();
-    const { winner, setWinner } = useData();
-    const { playerTurn, setPlayerTurn } = useData();
+    const { setTimer } = useData();
+    const { setIsGameFinished, isGameFinished } = useData();
+    const { setWinner } = useData();
     const { scorePlayerOne, setScorePlayerOne } = useData();
     const { scorePlayerTwo, setScorePlayerTwo } = useData();
+    const { currentPlayer } = useData();
+    const { board, setBoard } = useData();
+    const [winningToken, setWinningToken] = useState();
 
-    const playDisc = (e) => {
-        if (isGameFinished) {
-            return;
-        }
-        let columnPlayed = e.target.id.split(",")[0];
-
-        for (let i = columnPlayed; i <= columnPlayed; i++) {
-            for (let j = 0; j < board.length; j++) {
-
-                if (board[j][i] == null) {
-                    document.getElementById(i + "," + j).style.zIndex = '2';
-                    // Pose jeton côté IHM
-                    playerTurn === "Player 1" ?
-                        document.getElementById(i + "," + j).classList.add('player-one-active')
-                        : document.getElementById(i + "," + j).classList.add('player-two-active');
-
-                    // Pose jeton dans tableau
-                    board[j][i] = playerTurn === "Player 1" ? 1 : 2;
-                    checkVictory();
-                    setTimer(0);
-                    return;
-                }
-            }
-        }
-    }
 
     const checkVictory = () => {
-        let playerPlaying = playerTurn === "Player 1" ? 1 : 2;
+        currentPlayer === 1 ? setNbTokenPlayerOne(nbTokenPlayerOne + 1) : setNbTokenPlayerTwo(nbTokenPlayerTwo + 1);
         // Algo de victoire en row
-        for (let i = 0; i < board.length; i++) {
-            let inRowPoint = 0;
-            for (let j = 0; j < board[i].length; j++) {
-                if (board[i][j] === playerPlaying) {
-                    //Si l'élément suivant de la row vaut quelque chose, on incrémente le compteur
-                    inRowPoint++;
-
-                } else {
-                    //Sinon on le reset
-                    inRowPoint = 0;
-
-                }
-                if (inRowPoint >= 4) {
-                    setIsGameFinished(true);
-                    setTimer(0);
-                    setWinner(playerTurn);
-                    playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
-                    return;
+        if ((currentPlayer === 1 && nbTokenPlayerOne >= 3) || (currentPlayer === 2 && nbTokenPlayerTwo >= 3)) {
+            for (let i = 0; i < board.length; i++) {
+                let inRowPoint = 0;
+                for (let j = 0; j < board[i].length; j++) {
+                    if (board[i][j] === currentPlayer) {
+                        // On incrémente le compteur si le joueur a un jeton de posé.
+                        inRowPoint++;
+                        setWinningToken(true);
+                    } else {
+                        //Sinon on le reset.
+                        inRowPoint = 0;
+                        setWinningToken(false);
+                    }
+                    if (inRowPoint >= 4) {
+                        handleWinning();
+                        return;
+                    }
                 }
             }
         }
 
         // Algo de victoire en column
-        for (let i = 0; i <= board[0].length; i++) {
+        if (board.indexOf(board[columnIndex]) >= 3) {
             let inColumnPoint = 0;
-            for (let j = 0; j < board.length; j++) {
-                if (board[j][i] === playerPlaying) {
-                    inColumnPoint++;
-
+            for (let row = 0; row < 6; row++) {
+                if (board[row][columnIndex] === currentPlayer) {
+                    inColumnPoint++
+                    setWinningToken(true);
                 } else {
                     inColumnPoint = 0;
-                }
+                    setWinningToken(false);
 
+                }
                 if (inColumnPoint >= 4) {
-                    setIsGameFinished(true);
-                    setTimer(0);
-                    setWinner(playerTurn);
-                    playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+                    handleWinning();
                     return;
                 }
             }
         }
+
+
 
         // algo de vérif pas de puissance 4 en diag partant du bas
         let scoreDiag = 0;
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[i].length; j++) {
                 //Slot où l'on se trouve contient un jeton du joueur
-                if (board[i][j] === playerPlaying) {
+                if (board[i][j] === currentPlayer) {
                     // On incrémente le score
                     scoreDiag++;
                     let nextRow = i + 1;
                     let nextColumn = j + 1;
 
                     for (nextColumn; nextColumn < board[0].length; nextColumn++) {
-                        if (nextRow < 6 && board[nextRow][nextColumn] === playerPlaying) {
+                        if (nextRow < 6 && board[nextRow][nextColumn] === currentPlayer) {
                             scoreDiag++;
                             nextRow++;
+                            setWinningToken(true);
                             if (scoreDiag >= 4) {
-                                setIsGameFinished(true);
-                                setTimer(0);
-                                setWinner(playerTurn);
-                                playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+                                handleWinning();
                                 return;
                             }
                         } else {
                             scoreDiag = 0;
-
+                            setWinningToken(false);
                             break;
                         }
                     }
@@ -123,29 +96,29 @@ const DiscSlot = ({ idRow, idColumn }) => {
         for (let i = board.length - 1; i > 0; i--) {
             for (let j = 0; j < board[i].length; j++) {
                 //Slot où l'on se trouve contient un jeton du joueur
-                if (board[i][j] === playerPlaying) {
+                if (board[i][j] === currentPlayer) {
                     // On incrémente le score
                     scoreDiag++;
                     let nextRow = i - 1;
                     let nextColumn = j + 1;
 
                     for (nextColumn; nextColumn < board[0].length; nextColumn++) {
-                        if (board[nextRow][nextColumn] === playerPlaying) {
+                        if (board[nextRow][nextColumn] === currentPlayer) {
                             scoreDiag++;
                             nextRow--;
+                            setWinningToken(true);
                             if (scoreDiag >= 4) {
-                                setIsGameFinished(true);
-                                setTimer(0);
-                                setWinner(playerTurn);
-                                playerTurn === "Player 1" ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+                                handleWinning();
                                 return;
                             }
                             if (nextRow < 0) {
                                 scoreDiag = 0;
+                                setWinningToken(false);
                                 break;
                             }
                         } else {
                             scoreDiag = 0;
+                            setWinningToken(false);
                             break;
                         }
                     }
@@ -158,8 +131,40 @@ const DiscSlot = ({ idRow, idColumn }) => {
         }
     }
 
+    const handleWinning = () => {
+        setIsGameFinished(true);
+        setTimer(0);
+        setWinner(currentPlayer);
+        currentPlayer === 1 ? setScorePlayerOne(scorePlayerOne + 1) : setScorePlayerTwo(scorePlayerTwo + 1);
+    }
+
+    const playDisc = (column) => {
+        for (let row = 5; row >= 0; row--) {
+            if (board[row][column] === null) {
+                const newBoard = [...board];
+                newBoard[row][column] = currentPlayer;
+                setBoard(newBoard);
+                checkVictory();
+                setTimer(0);
+                break;
+            }
+        }
+    }
+
     return (
-        <div className='disc-slot' id={`${idColumn},${idRow}`} onClick={playDisc} ></div>
+        <div key={columnIndex} >
+            {cell === null && <div className='disc-slot' onClick={() => playDisc(columnIndex)}></div>}
+            {cell === 1 &&
+
+                <div className='disc-slot token-player-one' style={{ zIndex: 2 }}>
+                    {winningToken && isGameFinished && <div className='circle' />}
+                </div>}
+            {cell === 2 &&
+                <div className='disc-slot token-player-two' style={{ zIndex: 2 }}>
+                    {winningToken && isGameFinished && <div className='circle' />}
+                </div>}
+        </div>
+
     );
 };
 export default DiscSlot;

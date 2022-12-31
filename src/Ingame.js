@@ -4,25 +4,48 @@ import avatarPlayerOne from './images/player-one.svg'
 import avatarPlayerTwo from './images/player-two.svg'
 import playerOneTurn from './images/turn-background-red.svg'
 import playerTwoTurn from './images/turn-background-yellow.svg'
-import whiteBoard from './images/board-layer-white-small.svg'
-import blackBoard from './images/board-layer-black-small.svg'
+import smallWhiteBoard from './images/board-layer-white-small.svg'
+import smallBlackBoard from './images/board-layer-black-small.svg'
+import whiteBoard from './images/board-layer-white-large.svg'
+import blackBoard from './images/board-layer-black-large.svg'
 import RowBoard from './RowBoard';
 import useData from './Hooks/useData';
 import PopupMenu from './PopupMenu';
+import Board from './Board';
+
+function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+}
 
 const Ingame = () => {
 
 
     const { timer, setTimer } = useData();
-    const { playerTurn, setPlayerTurn } = useData();
-    const { board, setBoard } = useData();
+    const { currentPlayer, setCurrentPlayer } = useData();
+    const { board } = useData();
     const { winner, setWinner } = useData();
     const { isGameFinished, setIsGameFinished } = useData();
-    const { scorePlayerOne, setScorePlayerOne } = useData();
-    const { scorePlayerTwo, setScorePlayerTwo } = useData();
+    const { scorePlayerOne } = useData();
+    const { scorePlayerTwo } = useData();
     const { showPopup, setShowPopup } = useData();
     const [gamePaused, setGamePaused] = useState(null);
+    const [windowSize, setWindowSize] = useState(getWindowSize());
+    const tabletSize = { width: 768, height: 1024 };
+
     var timeOutID = useRef(null);
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
 
     useEffect(() => {
 
@@ -44,7 +67,7 @@ const Ingame = () => {
     }, [timer, gamePaused]);
 
     const onTimerResolve = () => {
-        playerTurn === "Player 1" ? setPlayerTurn("Player 2") : setPlayerTurn("Player 1");
+        currentPlayer === 1 ? setCurrentPlayer(2) : setCurrentPlayer(1);
     }
 
 
@@ -71,7 +94,6 @@ const Ingame = () => {
     };
 
     const clearBoard = () => {
-
         // Clear data board
         for (let i = 0; i <= board[0].length; i++) {
             for (let j = 0; j < board.length; j++) {
@@ -80,15 +102,7 @@ const Ingame = () => {
                 }
             }
         }
-        // Clear IHM board
-        let discSlots = document.getElementsByClassName('disc-slot');
-        Array.prototype.forEach.call(discSlots, function (discSlot) {
-            if (discSlot.classList.contains('player-one-active') || discSlot.classList.contains('player-two-active')) {
-                discSlot.classList.remove('player-one-active');
-                discSlot.classList.remove('player-two-active');
-                discSlot.style.zIndex = '100'
-            }
-        })
+
     }
 
     return (
@@ -119,36 +133,27 @@ const Ingame = () => {
                     </div>
                 </div>
                 <div className="game-board">
-                    <img src={blackBoard} className='board-img black-board' alt='' />
-
-                    <img src={whiteBoard} className='board-img white-board' alt='' />
-                    <div className='board'>
-                        <RowBoard idRow="5" />
-                        <RowBoard idRow="4" />
-                        <RowBoard idRow="3" />
-                        <RowBoard idRow="2" />
-                        <RowBoard idRow="1" />
-                        <RowBoard idRow="0" />
-                    </div>
+                    <img src={windowSize.innerWidth >= tabletSize.width && windowSize.innerHeight >= tabletSize.height ? blackBoard : smallBlackBoard} className='board-img black-board' alt='' />
+                    <img src={windowSize.innerWidth >= tabletSize.width && windowSize.innerHeight >= tabletSize.height ? whiteBoard : smallWhiteBoard} className='board-img white-board' alt='' />
+                    <Board />
                 </div>
 
                 <div className="game-messages-container">
-                    {!isGameFinished && <><img src={playerTurn === "Player 1" ? playerOneTurn : playerTwoTurn} alt='' />
-                        <div className={playerTurn === "Player 1" ? "turn-infos playerOne" : "turn-infos playerTwo"}>
-                            <span className='turn-text heading-xs'>{playerTurn}'S TURN</span>
+                    {!isGameFinished && <><img src={currentPlayer === 1 ? playerOneTurn : playerTwoTurn} alt='' />
+                        <div className={currentPlayer === 1 ? "turn-infos playerOne" : "turn-infos playerTwo"}>
+                            <span className='turn-text heading-xs'>{currentPlayer === 1 ? "Player 1" : "Player 2"}'S TURN</span>
                             <span className='turn-chrono heading-l'>{timer}s</span>
                         </div> </>}
                     {isGameFinished && <>
                         <div className="win-message-container">
-                            <span className='text-transform-up'>{winner}</span>
+                            <span className='text-transform-up'>{winner === 1 ? "Player 1" : "Player 2"}</span>
                             <span className='heading-l'>WINS</span>
                             <button className='primary-button' onClick={restartGame}>PLAY AGAIN</button>
                         </div>
                     </>}
                 </div>
-                <footer className={winner !== null ? winner === "Player 1" ? "ingame-footer winner playerOneWin" : "ingame-footer winner playerTwoWin" : "ingame-footer"}></footer>
+                <footer className={winner !== null ? winner === 1 ? "ingame-footer winner playerOneWin" : "ingame-footer winner playerTwoWin" : "ingame-footer"}></footer>
             </div>
-
             {showPopup ? <PopupMenu showPopup={showPopup} setShowPopup={setShowPopup} restartGame={restartGame} resumeTimer={resumeTimer} /> : null}
         </>
     );

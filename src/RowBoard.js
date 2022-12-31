@@ -1,18 +1,23 @@
 import React from 'react';
+import { useState } from 'react';
 import DiscSlot from './DiscSlot';
+import useData from './Hooks/useData';
 
-const RowBoard = ({ idRow }) => {
+const RowBoard = ({ row, rowIndex }) => {
+
+    const [nbTokenPlayerOne, setNbTokenPlayerOne] = useState(0);
+    const [nbTokenPlayerTwo, setNbTokenPlayerTwo] = useState(0);
+
     return (
-        <div className='row-board'>
-            <DiscSlot idRow={idRow} idColumn="0" />
-            <DiscSlot idRow={idRow} idColumn="1" />
-            <DiscSlot idRow={idRow} idColumn="2" />
-            <DiscSlot idRow={idRow} idColumn="3" />
-            <DiscSlot idRow={idRow} idColumn="4" />
-            <DiscSlot idRow={idRow} idColumn="5" />
-            <DiscSlot idRow={idRow} idColumn="6" />
-        </div>
+        <div key={rowIndex} className='row-board'>
+            {row.map((cell, columnIndex) => (
+                <DiscSlot key={columnIndex} rowIndex={rowIndex} cell={cell} columnIndex={columnIndex}
+                    setNbTokenPlayerOne={setNbTokenPlayerOne} nbTokenPlayerOne={nbTokenPlayerOne}
+                    setNbTokenPlayerTwo={setNbTokenPlayerTwo} nbTokenPlayerTwo={nbTokenPlayerTwo}
+                />
+            ))
+            }
+        </div >
     );
 };
-
 export default RowBoard;

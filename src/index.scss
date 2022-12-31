@@ -45,6 +45,10 @@
   justify-content: center !important;
 }
 
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
 #root {
   overflow: hidden;
 }
@@ -55,6 +59,9 @@ body {
   line-height: 1.313rem; //21px
   background-color: variables.$purle-300;
 
+  @media (min-width: variables.$tablet) {
+    background-color: variables.$purle-400;
+  }
 
 
   .main-container {
@@ -97,7 +104,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background-color: variables.$purle-300;
     height: inherit;
     padding: 4rem 2rem;
 
@@ -218,7 +225,7 @@ body {
             cursor: pointer;
           }
 
-          &.player-one-active {
+          &.token-player-one {
             &:after {
               content: url(./images/counter-red-small.svg);
               position: relative;
@@ -226,7 +233,7 @@ body {
             }
           }
 
-          &.player-two-active {
+          &.token-player-two {
             &:after {
               content: url(./images/counter-yellow-small.svg);
               position: relative;
@@ -324,12 +331,17 @@ body {
   .ingame-footer {
     background-color: hsl(257deg, 67%, 51%);
     border-radius: 73px 73px 0 0;
-    min-height: 17rem;
+    min-height: 50vh;
     position: relative;
     bottom: 17rem;
     right: 0rem;
-    min-width: 24rem;
+    //min-width: 24rem;
+    width: 100vw;
     z-index: 0;
+
+    @media (min-width: variables.$tablet) {
+      bottom: 14.625rem;
+    }
 
     &.playerOneWin {
       background-color: variables.$pink-400;
@@ -354,14 +366,14 @@ body {
     .rules {
       display: flex;
       flex-direction: column;
-      padding: 2rem 2rem 3rem 2rem;
-
-      gap: 2rem;
+      padding: 1.875rem 1.25rem 3.813rem 1.25rem;
+      gap: 1.813rem;
       background-color: white;
       border: 3px solid black;
       border-radius: 2.5rem;
       box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, black 0px 13px 0px 0px;
       max-width: 30rem;
+      min-height: 36.625rem;
 
       .rules-content {
         display: flex;
@@ -374,6 +386,9 @@ body {
         counter-reset: item;
         padding: 0;
         word-break: break-all;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
 
 
         .rules-list-element {
@@ -383,7 +398,7 @@ body {
             content: counter(item);
             counter-increment: item;
             font-weight: bold;
-            padding-right: 1rem;
+            padding-right: 1.063rem;
             display: inline-block;
           }
         }
@@ -420,26 +435,26 @@ body {
     flex-direction: column;
     justify-content: center;
     height: fit-content;
-    width: 100%;
     padding: 1.25rem;
     position: relative;
     bottom: 3.5rem;
+    min-width: 100%;
 
     @media (min-width: variables.$tablet) {
       background-color: variables.$purle-300;
       border: 3px solid black;
       box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, black 0px 7px 0px 0px;
-      max-width: 30rem;
-      padding: 2rem;
+      padding: 4.375rem 2.5rem 3.75rem 2.5rem;
       border-radius: 2.5rem;
-
+      min-height: 27.188rem;
+      bottom: 0;
+      min-width: 30rem;
     }
 
     .logo-container {
       display: flex;
       justify-content: center;
-      //margin-bottom: 2rem;
-      padding: 0 3rem 4rem 3rem;
+      padding: 0 3rem 4.938rem 3rem;
     }
 
     img {
@@ -451,8 +466,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
-
+    gap: 1.5rem;
   }
 
   .interactive-button {

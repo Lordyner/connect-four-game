@@ -9,7 +9,7 @@ const Rules = () => {
                 <span className='rules-main-title heading-l'>RULES</span>
                 <div className='rules-content'>
                     <span className='rules-title heading-s'>OBJECTIVE</span>
-                    <span>Be the first player to connect 4 of the same colored discs in a row
+                    <span className='mb-1'>Be the first player to connect 4 of the same colored discs in a row
                         (either vertically, horizontally, or diagonally). </span>
 
                     <span className='rules-title heading-s'>HOW TO PLAY</span>
