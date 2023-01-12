@@ -49,9 +49,33 @@
   margin-bottom: 1rem;
 }
 
+.no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:focus {
+    outline: none !important;
+
+  }
+}
+
 #root {
   overflow: hidden;
 }
+
+
+// .tablet-flex-order-1 {
+//   @media (min-width: variables.$tablet) {
+//     order: 1;
+//   }
+// }
+
+
 
 body {
   font-family: SpaceGroteskMedium;
@@ -62,7 +86,6 @@ body {
   @media (min-width: variables.$tablet) {
     background-color: variables.$purle-400;
   }
-
 
   .main-container {
     display: flex;
@@ -90,11 +113,16 @@ body {
     text-align: center;
     color: white;
 
-    @media (min-width: variables.$desktop) {
+    @media (min-width: variables.$tablet) {
       &:hover {
         background-color: variables.$pink-400;
         cursor: pointer;
       }
+    }
+
+    @media (min-width: variables.$tablet) {
+      padding: 9px 20px 10px 21px;
+      min-width: none;
     }
   }
 
@@ -108,43 +136,133 @@ body {
     height: inherit;
     padding: 4rem 2rem;
 
+    @media (min-width: variables.$tablet) {
+      padding: 1.875rem 4.25rem 5.25rem 4.25rem;
+    }
+
     .ingame-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
       margin-bottom: 2rem;
+      grid-area: ingame-header;
+
+      @media (min-width: variables.$desktop) {
+        width: 60%;
+      }
 
       img {
         width: 2.5rem;
+        height: 2.5rem;
+
+        @media (min-width: variables.$tablet) {
+          width: 3.25rem;
+          height: 3.25rem;
+        }
       }
     }
 
-    .score-board {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+    .grid-container {
+      display: grid;
+      gap: 0 1.25rem;
+
+
+      grid-template-areas:
+        "ingame-header ingame-header"
+        "score-board-player-one score-board-player-two"
+        "game-board game-board";
+
+      @media (min-width: variables.$tablet) {
+        gap: 0 3.75rem;
+      }
+
+      @media (min-width: variables.$desktop) {
+        grid-template-areas:
+          "ingame-header ingame-header ingame-header"
+          "score-board-player-one game-board score-board-player-two";
+        align-items: center;
+        justify-items: center;
+      }
+
+      .score-board-player-one {
+        grid-area: score-board-player-one;
+        justify-self: end;
+      }
+
+      .score-board-player-two {
+        grid-area: score-board-player-two;
+
+        @media (min-width: variables.$desktop) {
+          order: 5;
+        }
+      }
 
       .avatar-player-one,
       .avatar-player-two {
         width: 3.375rem;
         position: relative;
         bottom: 4.25rem;
+
+        @media (min-width: variables.$tablet) {
+          bottom: 4.7rem;
+        }
+
+        @media (min-width: variables.$desktop) {
+          bottom: 11.5rem;
+        }
       }
 
       .avatar-player-one {
-        right: 1.75rem;
+        right: 23px;
+
+
+        @media (min-width: variables.$tablet) {
+          right: 1.5rem;
+        }
+
+        @media (min-width: variables.$desktop) {
+          left: 2.5rem;
+          right: 0;
+        }
       }
 
       .avatar-player-two {
         left: 7.15rem;
+
+        @media (min-width: variables.$tablet) {
+          left: 16.15rem;
+        }
+
+        @media (min-width: variables.$desktop) {
+          left: 2.5rem;
+        }
       }
     }
+
+    .score-and-board {
+      display: flex;
+      flex-direction: row;
+
+      @media (max-width: variables.$tablet) {
+        max-width: 60%;
+      }
+
+      @media (min-width: variables.$tablet) {
+        align-items: center;
+        gap: 2rem;
+      }
+
+    }
+
 
     .score {
       font-size: 32px;
       font-family: SpaceGroteskBold;
+
+      @media (min-width: variables.$tablet) {
+        font-size: variables.$heading-500;
+      }
     }
 
     .game-board {
@@ -153,17 +271,41 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      grid-area: game-board;
+
+      @media (min-width: variables.$tablet) {
+        max-height: 39.5rem;
+      }
+
+
 
       .white-board {
         position: relative;
         bottom: 4rem;
         z-index: 3;
+
+
+        @media (min-width: variables.$tablet) {
+          bottom: 4.1rem;
+        }
+
+        @media (min-width: variables.$desktop) {
+          bottom: 1.1rem;
+        }
       }
 
       .black-board {
         position: relative;
         top: 16rem;
         z-index: 1;
+
+        @media (min-width: variables.$tablet) {
+          top: 33rem;
+        }
+
+        @media (min-width: variables.$desktop) {
+          top: 36rem;
+        }
       }
 
       .board {
@@ -177,12 +319,24 @@ body {
         color: red;
         font-weight: bold;
 
+        @media (min-width: variables.$tablet) {
+          height: 36.5rem;
+          min-height: 36.5rem;
+          width: 39.5rem;
+          bottom: 36.8rem;
+        }
+
         .row-board {
           display: flex;
-          /* gap: 8px; */
           min-width: 319px;
           margin-left: 6.8px;
           margin-bottom: 6.5px;
+
+          @media (min-width: variables.$tablet) {
+            min-width: 616px;
+            margin-left: 15.8px;
+            margin-bottom: 17px;
+          }
         }
 
         .column-board {
@@ -192,18 +346,63 @@ body {
           z-index: 15;
         }
 
+        .cursor {
+          @media (min-width: variables.$desktop) {
+            content: url(./images/marker-red.svg);
+            position: relative;
+            bottom: 2.5rem;
+            width: 32px;
+            height: 26px;
+            left: 1.5rem;
+
+            &.hidden {
+              visibility: hidden;
+            }
+          }
+        }
+
         .disc-slot {
-          width: 3rem;
           display: flex;
           justify-content: center;
-          //border: 3px solid;
           height: 40px;
           width: 40px;
-          border-radius: 50%;
+          // border-radius: 50%;
           margin-right: 6.65px;
-          //padding: .75rem;
           position: relative;
           z-index: 10;
+          cursor: pointer;
+
+
+          &.hover-player-one {
+            @media (min-width: variables.$desktop) {
+              content: url(./images/marker-red.svg);
+              position: relative;
+              bottom: 2.3rem;
+              width: 32px;
+              height: 26px;
+              left: 1.5rem;
+            }
+          }
+
+          &.hover-player-two {
+            @media (min-width: variables.$desktop) {
+              content: url(./images/marker-yellow.svg);
+              position: relative;
+              bottom: 2.3rem;
+              width: 32px;
+              height: 26px;
+              left: 1.5rem;
+            }
+          }
+
+          @media (min-width: variables.$tablet) {
+            height: 72px;
+            width: 70px;
+            margin-right: 18px;
+          }
+
+
+
 
           .circle {
             position: absolute;
@@ -218,6 +417,17 @@ body {
             padding: 4px;
             padding: -42px;
             border: 6px solid white;
+
+            @media (min-width: variables.$tablet) {
+              min-width: 34px;
+              min-height: 34px;
+              bottom: 20px;
+              left: 19px;
+            }
+
+            @media (min-width: variables.$desktop) {
+              bottom: 42px;
+            }
           }
 
 
@@ -230,6 +440,14 @@ body {
               content: url(./images/counter-red-small.svg);
               position: relative;
 
+
+              @media (min-width: variables.$tablet) {
+                content: url(./images/counter-red-large.svg);
+              }
+
+              @media (min-width: variables.$desktop) {
+                bottom: 25px;
+              }
             }
           }
 
@@ -237,6 +455,14 @@ body {
             &:after {
               content: url(./images/counter-yellow-small.svg);
               position: relative;
+
+              @media (min-width: variables.$tablet) {
+                content: url(./images/counter-yellow-large.svg);
+              }
+
+              @media (min-width: variables.$desktop) {
+                bottom: 25px;
+              }
             }
           }
         }
@@ -251,6 +477,14 @@ body {
       max-height: 12rem;
       bottom: 5.5rem;
       z-index: 20;
+
+      @media (min-width: variables.$tablet) {
+        bottom: 8rem;
+      }
+
+      @media (min-width: variables.$desktop) {
+        bottom: 5rem;
+      }
 
       &:after {
         background-color: red;
@@ -302,13 +536,21 @@ body {
     box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, black 0px 11px 0px 0px;
     position: fixed;
     width: 90%;
-    height: 27.313rem;
+    max-height: 27.313rem;
     z-index: 100;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
+
+    @media (min-width: variables.$tablet) {
+      max-width: 30rem;
+      max-height: 30.688rem;
+      padding: 3.125rem 2.5rem;
+      gap: 1.875rem;
+
+    }
   }
 
   .filter {
@@ -335,12 +577,17 @@ body {
     position: relative;
     bottom: 17rem;
     right: 0rem;
-    //min-width: 24rem;
     width: 100vw;
     z-index: 0;
 
     @media (min-width: variables.$tablet) {
-      bottom: 14.625rem;
+      bottom: 17rem;
+      min-height: 12.5rem;
+    }
+
+    @media (min-width: variables.$desktop) {
+      bottom: 17rem;
+      min-height: 20rem;
     }
 
     &.playerOneWin {
@@ -362,6 +609,10 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    background-color: variables.$purle-300;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
 
     .rules {
       display: flex;
@@ -375,7 +626,26 @@ body {
       max-width: 30rem;
       min-height: 36.625rem;
 
+      @media (min-width: variables.$tablet) {
+        gap: 0;
+        min-height: 33.563rem;
+        padding: 1.875rem 2.125rem 3.375rem 2.125rem;
+
+      }
+
       .rules-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.813rem;
+      }
+
+      .rules-objective {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .rules-how-to-play {
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -412,13 +682,14 @@ body {
       .rules-main-title {
         display: flex;
         justify-content: center;
+        margin-bottom: 1.813rem;
       }
     }
 
     .rules-check {
       position: relative;
       text-align: center;
-      bottom: 2rem;
+      bottom: 2.5rem;
 
       svg {
         @media (min-width: variables.$tablet) {
@@ -483,11 +754,17 @@ body {
     color: black;
 
     @media (min-width: variables.$tablet) {
+      box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, black 0px 11px 0px 0px;
+
       &:hover {
         cursor: pointer;
         box-shadow: rgb(0 0 0 / 16%) 0px 5px 5px, variables.$purle-400 0px 7px 0px 0px;
         border-color: variables.$purle-400;
       }
+    }
+
+    @media (min-width: variables.$desktop) {
+      justify-content: center;
     }
 
     &.primary {
@@ -512,6 +789,70 @@ body {
       min-width: 8.875rem;
       gap: .75rem;
       padding: .5rem;
+
+      @media (max-width: variables.$tablet) {
+        max-width: 8.875rem;
+
+      }
+
+      @media (min-width: variables.$tablet) {
+        min-width: 17rem;
+        min-height: 6.25rem;
+        flex-direction: row;
+
+
+        .player-name {
+          font-size: variables.$heading-300;
+          line-height: 1.625rem;
+
+        }
+      }
+
+      @media (min-width: variables.$desktop) {
+        min-width: unset;
+        gap: 2rem;
+
+      }
+
+      &.first-player,
+      &.second-player {
+        @media (min-width: variables.$desktop) {
+          flex-direction: column;
+          min-height: 10rem;
+          padding: 2rem 1.75rem;
+        }
+      }
+
+      &.first-player {
+        @media (min-width: variables.$tablet) {
+          padding: 14px 20px 15px 44px;
+
+        }
+
+        @media (min-width: variables.$desktop) {
+          padding: 2rem 1.75rem;
+        }
+      }
+
+      &.second-player {
+        @media (min-width: variables.$tablet) {
+          padding: 14px 44px 15px 20px;
+        }
+
+        @media (min-width: variables.$desktop) {
+          padding: 2rem 1.75rem;
+        }
+
+        // @media (min-width: variables.$tablet) {
+        //   order: 1;
+        // }
+      }
+
+      .player-name {
+        font-size: variables.$heading-200;
+        font-weight: 700;
+
+      }
     }
   }
 }

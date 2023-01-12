@@ -94,48 +94,49 @@ const Ingame = () => {
     };
 
     const clearBoard = () => {
-        // Clear data board
         for (let i = 0; i <= board[0].length; i++) {
             for (let j = 0; j < board.length; j++) {
                 if (board[j][i] !== null && board[j][i] !== undefined) {
-                    board[j][i] = null;
+                    board[j][i].tokenPlayer = null;
+                    board[j][i].mouseHoverr = false;
                 }
+
             }
         }
-
     }
 
     return (
         <>
             <div className='ingame-container'>
-                <div className="ingame-header">
-                    <a className='primary-button' onClick={() => {
-                        setShowPopup(!showPopup);
-                        pauseTimer();
-                    }}>MENU</a>
-                    <img src={logo} alt="" />
-                    <a onClick={restartGame} className='primary-button'>RESTART</a>
-                </div>
-                <div className="score-board">
-                    <div className="d-flex flex-column">
-                        <div className="interactive-button player-panel secondary">
-                            <span className="player-name heading-xs">PLAYER 1</span>
+
+                <div className="grid-container">
+                    <div className="ingame-header">
+                        <a className='primary-button' onClick={() => {
+                            setShowPopup(!showPopup);
+                            pauseTimer();
+                        }}>MENU</a>
+                        <img src={logo} alt="" />
+                        <a onClick={restartGame} className='primary-button'>RESTART</a>
+                    </div>
+                    <div className="score-board-player-one">
+                        <div className="interactive-button first-player player-panel secondary">
+                            <span className="player-name">PLAYER 1</span>
                             <span className="score">{scorePlayerOne}</span>
                         </div>
                         <img src={avatarPlayerOne} className='avatar-player-one' alt='' />
                     </div>
-                    <div className="d-flex flex-column">
-                        <div className="interactive-button player-panel secondary">
-                            <span className="player-name heading-xs">PLAYER 2</span>
+                    <div className="score-board-player-two">
+                        <div className="interactive-button second-player player-panel secondary">
+                            <span className="player-name">PLAYER 2</span>
                             <span className="score">{scorePlayerTwo}</span>
                         </div>
                         <img src={avatarPlayerTwo} className='avatar-player-two' alt='' />
                     </div>
-                </div>
-                <div className="game-board">
-                    <img src={windowSize.innerWidth >= tabletSize.width && windowSize.innerHeight >= tabletSize.height ? blackBoard : smallBlackBoard} className='board-img black-board' alt='' />
-                    <img src={windowSize.innerWidth >= tabletSize.width && windowSize.innerHeight >= tabletSize.height ? whiteBoard : smallWhiteBoard} className='board-img white-board' alt='' />
-                    <Board />
+                    <div className="game-board">
+                        <img src={windowSize.innerWidth >= tabletSize.width ? blackBoard : smallBlackBoard} className='board-img black-board no-select' alt='' />
+                        <img src={windowSize.innerWidth >= tabletSize.width ? whiteBoard : smallWhiteBoard} className='board-img white-board no-select' alt='' />
+                        <Board />
+                    </div>
                 </div>
 
                 <div className="game-messages-container">
