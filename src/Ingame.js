@@ -135,7 +135,7 @@ const Ingame = () => {
                     <div className="game-board">
                         <img src={windowSize.innerWidth >= tabletSize.width ? blackBoard : smallBlackBoard} className='board-img black-board no-select' alt='' />
                         <img src={windowSize.innerWidth >= tabletSize.width ? whiteBoard : smallWhiteBoard} className='board-img white-board no-select' alt='' />
-                        <Board />
+                        <Board windowSize={windowSize} />
                     </div>
                 </div>
 

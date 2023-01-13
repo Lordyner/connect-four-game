@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useData from './Hooks/useData';
 
-const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPlayerTwo, nbTokenPlayerOne, setNbTokenPlayerOne }) => {
+const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPlayerTwo, nbTokenPlayerOne, setNbTokenPlayerOne, windowSize }) => {
 
 
     const { setTimer } = useData();
@@ -174,7 +174,7 @@ const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPla
 
     return (
         <div key={columnIndex}>
-            {rowIndex === 0 && <div className={cell.mouseHover ? board[rowIndex][columnIndex].tokenPlayer === null ? "cursor" : "cursor hidden" : "cursor hidden"} ></div>}
+            {rowIndex === 0 && windowSize.innerWidth > 1440 && <div className={cell.mouseHover ? board[rowIndex][columnIndex].tokenPlayer === null ? "cursor j" + currentPlayer : "cursor hidden" : "cursor hidden"} ></div>}
             {cell.tokenPlayer === null &&
 
                 < div className='disc-slot no-select'
