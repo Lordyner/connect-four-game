@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import useData from './Hooks/useData';
 
 const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPlayerTwo, nbTokenPlayerOne, setNbTokenPlayerOne, windowSize }) => {
@@ -23,7 +22,6 @@ const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPla
     const checkVictory = () => {
         currentPlayer === 1 ? setNbTokenPlayerOne(nbTokenPlayerOne + 1) : setNbTokenPlayerTwo(nbTokenPlayerTwo + 1);
         // Algo de victoire en row
-        //if ((currentPlayer === 1 && nbTokenPlayerOne >= 3) || (currentPlayer === 2 && nbTokenPlayerTwo >= 3)) {
         for (let i = 0; i < board.length; i++) {
             let inRowPoint = 0;
             for (let j = 0; j < board[i].length; j++) {
@@ -44,7 +42,6 @@ const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPla
             }
             resetWinningToken();
         }
-        //}
 
         // Algo de victoire en column
         let inColumnPoint = 0;
