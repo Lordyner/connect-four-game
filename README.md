@@ -35,7 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://lordyner.github.io/connect-four-game/]
+- Live site: [https://lordyner.github.io/connect-four-game/]
+- Solution URL: [https://www.frontendmentor.io/solutions/connect-four-game-xf9359sDRB]
 
 ## My process
 
