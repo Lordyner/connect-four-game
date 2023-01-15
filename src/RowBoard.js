@@ -8,18 +8,21 @@ const RowBoard = ({ row, rowIndex, windowSize }) => {
     const [nbTokenPlayerTwo, setNbTokenPlayerTwo] = useState(0);
 
     return (
+        <>
 
-        <div key={rowIndex} className='row-board'>
-            {row.map((cell, columnIndex) => (
-                <DiscSlot key={columnIndex} rowIndex={rowIndex} cell={cell} columnIndex={columnIndex}
-                    setNbTokenPlayerOne={setNbTokenPlayerOne} nbTokenPlayerOne={nbTokenPlayerOne}
-                    setNbTokenPlayerTwo={setNbTokenPlayerTwo} nbTokenPlayerTwo={nbTokenPlayerTwo}
-                    windowSize={windowSize}
-                />
-            ))
-            }
-        </div>
 
+            <div key={rowIndex} className='row-board'>
+                {row.map((cell, columnIndex) => (
+                    <DiscSlot key={columnIndex} rowIndex={rowIndex} cell={cell} columnIndex={columnIndex}
+                        setNbTokenPlayerOne={setNbTokenPlayerOne} nbTokenPlayerOne={nbTokenPlayerOne}
+                        setNbTokenPlayerTwo={setNbTokenPlayerTwo} nbTokenPlayerTwo={nbTokenPlayerTwo}
+                        windowSize={windowSize}
+                    />
+                ))
+                }
+
+            </div>
+        </>
     );
 };
 export default RowBoard;

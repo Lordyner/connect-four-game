@@ -8,15 +8,9 @@ import smallWhiteBoard from './images/board-layer-white-small.svg'
 import smallBlackBoard from './images/board-layer-black-small.svg'
 import whiteBoard from './images/board-layer-white-large.svg'
 import blackBoard from './images/board-layer-black-large.svg'
-import RowBoard from './RowBoard';
 import useData from './Hooks/useData';
 import PopupMenu from './PopupMenu';
 import Board from './Board';
-
-function getWindowSize() {
-    const { innerWidth, innerHeight } = window;
-    return { innerWidth, innerHeight };
-}
 
 const Ingame = () => {
 
@@ -30,6 +24,7 @@ const Ingame = () => {
     const { scorePlayerTwo } = useData();
     const { showPopup, setShowPopup } = useData();
     const [gamePaused, setGamePaused] = useState(null);
+    const { getWindowSize } = useData()
     const [windowSize, setWindowSize] = useState(getWindowSize());
     const tabletSize = { width: 768, height: 1024 };
 

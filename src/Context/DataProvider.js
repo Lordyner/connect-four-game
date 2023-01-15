@@ -12,16 +12,20 @@ export const DataProvider = ({ children }) => {
     const [isHover, setIsHover] = useState();
     let [nbTokenPlayerOne, setNbTokenPlayerOne] = useState();
     let [nbTokenPlayerTwo, setNbTokenPlayerTwo] = useState();
+    const getWindowSize = () => {
+        const { innerWidth, innerHeight } = window;
+        return { innerWidth, innerHeight };
+    }
 
     // Can't use fill method because it creates one row that's internally referenced many times
     // So when we try to update a value, it updates the whole column.
     const [board, setBoard] = useState([
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
-        [{ tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }, { tokenPlayer: null, winningToken: false, mouseHover: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
+        [{ tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }, { tokenPlayer: null, winningToken: false }],
     ]);
 
     return (
@@ -37,6 +41,7 @@ export const DataProvider = ({ children }) => {
             nbTokenPlayerOne, setNbTokenPlayerOne,
             nbTokenPlayerTwo, setNbTokenPlayerTwo,
             isHover, setIsHover,
+            getWindowSize
         }}>
             {children}
         </DataContext.Provider>

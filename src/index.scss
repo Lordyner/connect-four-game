@@ -309,6 +309,7 @@ body {
         }
       }
 
+
       .board {
         width: 335px;
         height: 310px;
@@ -343,6 +344,17 @@ body {
             margin-left: 15.8px;
             margin-bottom: 17px;
           }
+
+          @media (min-width: variables.$desktop) {
+            img {
+              position: absolute;
+              top: -1.5rem;
+              margin-left: 1.2rem;
+
+            }
+          }
+
+
         }
 
         .column-board {
@@ -353,28 +365,7 @@ body {
         }
 
         .cursor {
-          position: relative;
-          bottom: 2.5rem;
-          width: 32px;
-          height: 26px;
-          left: 1.5rem;
-          content: url(./images/marker-red.svg);
-
-          &.hidden {
-            visibility: hidden;
-          }
-
-          &.j1 {
-            @media (min-width: variables.$desktop) {
-              content: url(./images/marker-red.svg);
-            }
-          }
-
-          &.j2 {
-            @media (min-width: variables.$desktop) {
-              content: url(./images/marker-yellow.svg);
-            }
-          }
+          margin: -2rem auto 0;
         }
 
         .disc-slot {
@@ -435,7 +426,8 @@ body {
             }
 
             @media (min-width: variables.$desktop) {
-              bottom: 46px;
+              bottom: 22px;
+              ;
             }
           }
 
@@ -483,7 +475,8 @@ body {
               }
 
               @media (min-width: variables.$desktop) {
-                top: -29px;
+                top: -2px;
+                ;
 
               }
             }
@@ -501,7 +494,7 @@ body {
               }
 
               @media (min-width: variables.$desktop) {
-                top: -29px;
+                top: -2px;
               }
             }
           }
