@@ -9,9 +9,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <DataProvider>
     <HashRouter>
-      {/* <Routes>
-        <Route path="/*" element={<App />} />
-      </Routes> */}
       <App />
     </HashRouter>
   </DataProvider>

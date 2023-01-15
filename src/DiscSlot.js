@@ -5,7 +5,6 @@ import useData from './Hooks/useData';
 import cursorRed from './images/marker-red.svg'
 import cursorYellow from './images/marker-yellow.svg'
 
-
 const DiscSlot = ({ rowIndex, cell, columnIndex, setNbTokenPlayerTwo, nbTokenPlayerTwo, nbTokenPlayerOne, setNbTokenPlayerOne }) => {
 
 

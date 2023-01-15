@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Rules = () => {
     return (
-
         <div className='rules-container'>
             <div className='rules'>
                 <span className='rules-main-title heading-l'>RULES</span>
@@ -29,7 +28,6 @@ const Rules = () => {
                 <img src={checkImage} alt="" />
             </Link>
         </div>
-
     );
 };
 
