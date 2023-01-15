@@ -10,6 +10,7 @@ This is a solution to the [Connect Four game challenge on Frontend Mentor](https
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
@@ -35,10 +36,47 @@ Users should be able to:
 
 ### Links
 
-- Live site: [https://lordyner.github.io/connect-four-game/]
-- Solution URL: [https://www.frontendmentor.io/solutions/connect-four-game-xf9359sDRB]
+- Solution URL: [https://lordyner.github.io/connect-four-game/]
 
-## My process
+## What I learned
+
+I learned how to use grid to solve responsive problems that can't be solve with flexboxs. For example we don't have the same layouts between mobile/tablet and desktop. In mobile/tablet the score boards are above the game board but in desktop, the game board is in between the two score board.
+
+```css
+.grid-container {
+      display: grid;
+      gap: 0 1.25rem;
+
+
+      grid-template-areas:
+        "ingame-header ingame-header"
+        "score-board-player-one score-board-player-two"
+        "game-board game-board";
+
+      @media (min-width: variables.$tablet) {
+        gap: 0 3.75rem;
+      }
+
+      @media (min-width: variables.$desktop) {
+        grid-template-areas:
+          "ingame-header ingame-header ingame-header"
+          "score-board-player-one game-board score-board-player-two";
+        align-items: center;
+        justify-items: center;
+      }
+}
+```
+
+I learned that I should be more careful of small details during my first analyze, regarding layout, or animations, or functionnality and there implications on the code. 
+
+I also learned that using decrement on state doesn't work 
+
+```js
+setCounter(counter--); 
+
+```
+
+
 
 ### Built with
 
@@ -48,6 +86,8 @@ Users should be able to:
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
+
+### Built with
 
 
 ### Continued development
