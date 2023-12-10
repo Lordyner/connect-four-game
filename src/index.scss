@@ -64,10 +64,6 @@
   }
 }
 
-#root {
-  overflow: hidden;
-}
-
 
 body {
   font-family: SpaceGroteskMedium;
@@ -83,7 +79,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     position: relative;
     z-index: 10;
     height: 100vh;
